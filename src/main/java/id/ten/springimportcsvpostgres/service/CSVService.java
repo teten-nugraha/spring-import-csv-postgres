@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -25,4 +26,11 @@ public class CSVService {
         }
     }
 
+    public ByteArrayInputStream load() {
+        List<Mahasiswa> mahasiswaList = mahasiswaRepository.findAll();
+
+        ByteArrayInputStream inputStream = CSVHelper.mahasiswaToCSV(mahasiswaList);
+
+        return inputStream;
+    }
 }
